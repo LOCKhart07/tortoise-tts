@@ -4,9 +4,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="TorToiSe",
+    name="tortoise-tts",
     packages=setuptools.find_packages(),
-    version="2.4.2",
+    version="3.0.0",
     author="James Betker",
     author_email="james@adamant.ai",
     description="A high quality multi-voice text-to-speech library",
@@ -27,8 +27,10 @@ setuptools.setup(
         'unidecode',
         'scipy',
         'librosa',
-        'transformers',
-        'tokenizers',
+        'transformers==4.31.0',
+        'tokenizers==0.14.0',
+        'scipy==1.13.1'
+        # 'deepspeed==0.8.3',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

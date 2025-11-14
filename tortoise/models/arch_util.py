@@ -43,7 +43,7 @@ def normalization(channels):
 
 class QKVAttentionLegacy(nn.Module):
     """
-    A module which performs QKV attention. Matches legacy QKVAttention + input/ouput heads shaping
+    A module which performs QKV attention. Matches legacy QKVAttention + input/output heads shaping
     """
 
     def __init__(self, n_heads):
@@ -319,6 +319,8 @@ class TorchMelSpectrogram(nn.Module):
         if len(inp.shape) == 3:  # Automatically squeeze out the channels dimension if it is present (assuming mono-audio)
             inp = inp.squeeze(1)
         assert len(inp.shape) == 2
+        if torch.backends.mps.is_available():
+            inp = inp.to('cpu')
         self.mel_stft = self.mel_stft.to(inp.device)
         mel = self.mel_stft(inp)
         # Perform dynamic range compression
